@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1e3a8a;
+  --color-sky: #0ea5e9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface text-neutral-900 antialiased;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-next,
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-prev {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0;
+  /* сдвиг относительно контента: половина полосы под пагинацию */
+  top: calc(50% + 1.25rem);
+  background: #ffffff;
+  border: 2px solid #1e3a8a;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 18px -2px rgb(30 58 138 / 0.35), 0 2px 6px -2px rgb(0 0 0 / 0.12);
+  color: #1e3a8a;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-next:after,
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-prev:after {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-prev {
+  left: 0.25rem;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-next {
+  right: 0.25rem;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-next:hover,
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-prev:hover {
+  background: #1e3a8a;
+  color: #ffffff;
+  box-shadow: 0 8px 28px -6px rgb(30 58 138 / 0.45), 0 4px 10px -4px rgb(0 0 0 / 0.15);
+  transform: scale(1.04);
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-next:active,
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-prev:active {
+  transform: scale(0.98);
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-next:focus-visible,
+.gallery-swiper.gallery-swiper--pagination-top .swiper-button-prev:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 3px;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-pagination {
+  top: 0;
+  bottom: auto !important;
+  left: 0;
+  right: 0;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0 3rem; /* место под стрелки по бокам */
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-pagination-bullet {
+  margin: 0 4px !important;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-pagination-bullet-active {
+  background: #1e3a8a;
+}
+
+.gallery-swiper.gallery-swiper--pagination-top .swiper-wrapper {
+  margin-top: 2.5rem;
+}
+
+@layer utilities {
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-primary via-sky-accent to-success bg-clip-text text-transparent;
+  }
+
+  .brush-underline {
+    @apply relative inline;
+    background: linear-gradient(
+      120deg,
+      rgb(14 165 233 / 0.35) 0%,
+      rgb(34 197 94 / 0.35) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.42em;
+    background-position: 0 88%;
+  }
+}

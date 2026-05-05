@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="ZS-Services">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E3A8A"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="300" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="700" fill="#fff">ZS-Services</text>
+  <text x="600" y="370" text-anchor="middle" font-family="system-ui,sans-serif" font-size="28" fill="#fff" opacity="0.9"> 5<>=B :20@B8@ 70 714 4=59</text>
+</svg>
