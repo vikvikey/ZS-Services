@@ -11,7 +11,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-neutral-200/80 bg-surface/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <a href="#hero" className="flex items-end gap-2 font-heading text-lg font-bold text-primary sm:text-3xl">
-          <Image src={siteConfig.brandLogoSrc} alt={siteConfig.brandLogoAlt} width={100} height={66.32} />
+          <Image src={siteConfig.brandLogoSrc} alt={siteConfig.brandLogoAlt} width={100} height={66.32} fetchPriority="high" />
           {siteConfig.brandLogoText}
         </a>
         <nav className="flex items-center gap-2 sm:gap-3" aria-label={navAriaLabel}>

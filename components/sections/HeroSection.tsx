@@ -53,6 +53,7 @@ export function HeroSection() {
               height={560}
               className="h-auto w-full object-cover"
               priority
+              fetchPriority="high"
               sizes="(max-width: 1024px) 280px, 280px"
             />
           </div>

@@ -30,9 +30,10 @@ export function GalleryCarousel() {
                 alt={slide.beforeAlt}
                 width={1200}
                 height={800}
-                className="h-[80vh] w-full object-cover"
+                className="aspect-[3/2] max-h-[min(80vh,900px)] w-full object-cover sm:aspect-auto sm:h-[min(72vh,820px)] sm:max-h-none"
                 loading={index === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
+                fetchPriority={index === 0 ? "auto" : "low"}
               />
               <figcaption className="px-3 py-2 text-center text-xs font-semibold uppercase tracking-wide text-neutral-500">
                 {g.labelBefore}
@@ -44,9 +45,10 @@ export function GalleryCarousel() {
                 alt={slide.afterAlt}
                 width={1200}
                 height={800}
-                className="h-[80vh] w-full object-cover"
+                className="aspect-[3/2] max-h-[min(80vh,900px)] w-full object-cover sm:aspect-auto sm:h-[min(72vh,820px)] sm:max-h-none"
                 loading={index === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
+                fetchPriority={index === 0 ? "auto" : "low"}
               />
               <figcaption className="px-3 py-2 text-center text-xs font-semibold uppercase tracking-wide text-success">
                 {g.labelAfter}
