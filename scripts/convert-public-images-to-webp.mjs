@@ -17,7 +17,7 @@ const RASTER_IN = /\.(jpe?g|png)$/i;
 const WEBP = /\.webp$/i;
 
 /** Целевой потолок размера файла (KiB). */
-const TARGET_KB = 150;
+const TARGET_KB = 110;
 const MAX_BYTES = Math.round(TARGET_KB * 1024);
 
 const QUALITY_MIN = 35;
