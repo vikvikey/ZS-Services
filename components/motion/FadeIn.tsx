@@ -5,6 +5,9 @@ import { cn } from "@/lib/cn";
 
 const ioOpts: IntersectionObserverInit = { rootMargin: "-48px 0px", threshold: 0 };
 
+/** Страховка: без этого блоки могут остаться с opacity-0, если IO/ref не сработали. */
+const IO_FALLBACK_MS = 3500;
+
 export type FadeInProps = Omit<ComponentProps<"div">, "children"> & {
   /** Без анимации и без IO — для блоков выше сгиба (hero). */
   immediate?: boolean;
@@ -43,20 +46,38 @@ export function FadeIn({
     }
 
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      setShown(true);
+      return;
+    }
+
+    let finished = false;
+    let fallbackId = 0;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      window.clearTimeout(fallbackId);
+      setShown(true);
+    };
 
     const io = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          setShown(true);
           io.disconnect();
+          finish();
           return;
         }
       }
     }, ioOpts);
 
     io.observe(el);
-    return () => io.disconnect();
+    fallbackId = window.setTimeout(finish, IO_FALLBACK_MS);
+
+    return () => {
+      window.clearTimeout(fallbackId);
+      io.disconnect();
+    };
   }, [immediate, reduceMotion]);
 
   const animate = !immediate && !reduceMotion;
