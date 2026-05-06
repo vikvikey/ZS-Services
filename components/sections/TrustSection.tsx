@@ -20,7 +20,7 @@ export function TrustSection() {
                 src={siteConfig.examplePhotoSrc}
                 alt={siteConfig.examplePhotoAlt}
                 width={560}
-                height={560}
+                height={700}
                 className="h-auto w-full object-cover"
                 sizes="(max-width: 1024px) 280px, 280px"
               />

@@ -28,12 +28,12 @@ export function GalleryCarousel() {
               <Image
                 src={slide.beforeSrc}
                 alt={slide.beforeAlt}
-                width={1200}
-                height={800}
+                width={800}
+                height={534}
                 className="aspect-[3/2] max-h-[min(80vh,900px)] w-full object-cover sm:aspect-auto sm:h-[min(72vh,820px)] sm:max-h-none"
                 loading={index === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
-                fetchPriority={index === 0 ? "auto" : "low"}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) calc(50vw - 2.5rem), 640px"
+                fetchPriority="low"
               />
               <figcaption className="px-3 py-2 text-center text-xs font-semibold uppercase tracking-wide text-neutral-500">
                 {g.labelBefore}
@@ -43,12 +43,12 @@ export function GalleryCarousel() {
               <Image
                 src={slide.afterSrc}
                 alt={slide.afterAlt}
-                width={1200}
-                height={800}
+                width={800}
+                height={534}
                 className="aspect-[3/2] max-h-[min(80vh,900px)] w-full object-cover sm:aspect-auto sm:h-[min(72vh,820px)] sm:max-h-none"
                 loading={index === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
-                fetchPriority={index === 0 ? "auto" : "low"}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) calc(50vw - 2.5rem), 640px"
+                fetchPriority="low"
               />
               <figcaption className="px-3 py-2 text-center text-xs font-semibold uppercase tracking-wide text-success">
                 {g.labelAfter}

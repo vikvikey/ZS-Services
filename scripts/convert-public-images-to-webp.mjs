@@ -3,7 +3,10 @@
  * - .jpg / .jpeg / .png → WebP с ресайзом и сжатием, исходник удаляется
  * - уже существующие .webp в public/ перекодируются и при необходимости уменьшаются
  *
- * Лимиты (пиксели по длинной стороне, fit: inside): галерея — 1200, прочие растры — 720.
+ * Лимиты (fit: inside, длинная сторона):
+ * - слайды галереи (кроме example-photo) — 800 px, quality 72
+ * - example-photo (колонка ~280px) — 560 px, quality 72
+ * - прочие растры — 720 px, quality 78
  */
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -15,12 +18,25 @@ const publicDir = path.resolve(__dirname, "..", "public");
 const RASTER_IN = /\.(jpe?g|png)$/i;
 const WEBP = /\.webp$/i;
 
-const QUALITY = 78;
-const MAX_GALLERY = 1200;
+const QUALITY_DEFAULT = 78;
+const QUALITY_GALLERY = 72;
+const MAX_CAROUSEL = 800;
+const MAX_COL_PHOTO = 560;
 const MAX_DEFAULT = 720;
 
+function isGalleryExample(relPosix) {
+  return /(^|\/)example-photo\.webp$/i.test(relPosix);
+}
+
 function maxEdgeForRel(relPosix) {
-  return relPosix.includes("gallery/") ? MAX_GALLERY : MAX_DEFAULT;
+  if (isGalleryExample(relPosix)) return MAX_COL_PHOTO;
+  if (relPosix.includes("gallery/")) return MAX_CAROUSEL;
+  return MAX_DEFAULT;
+}
+
+function qualityForRel(relPosix) {
+  if (relPosix.includes("gallery/")) return QUALITY_GALLERY;
+  return QUALITY_DEFAULT;
 }
 
 /**
@@ -39,18 +55,19 @@ function resizeIfNeeded(pipeline, meta, maxEdge) {
   });
 }
 
-async function writeWebpToTemp(pipeline, tmpPath) {
-  await pipeline.webp({ quality: QUALITY, effort: 5 }).toFile(tmpPath);
+async function writeWebpToTemp(pipeline, tmpPath, quality) {
+  await pipeline.webp({ quality, effort: 5 }).toFile(tmpPath);
 }
 
 async function convertRasterToWebp(filePath) {
   const rel = path.relative(publicDir, filePath).split(path.sep).join("/");
   const outPath = filePath.replace(RASTER_IN, ".webp");
+  const q = qualityForRel(rel);
   let pipeline = sharp(filePath).rotate();
   const meta = await pipeline.metadata();
   pipeline = resizeIfNeeded(pipeline, meta, maxEdgeForRel(rel));
   const tmp = `${outPath}.tmp`;
-  await writeWebpToTemp(pipeline, tmp);
+  await writeWebpToTemp(pipeline, tmp, q);
   await fs.rename(tmp, outPath);
   await fs.unlink(filePath);
   console.log("[webp]", rel, "→", path.relative(publicDir, outPath).split(path.sep).join("/"));
@@ -58,11 +75,12 @@ async function convertRasterToWebp(filePath) {
 
 async function reoptimizeWebp(filePath) {
   const rel = path.relative(publicDir, filePath).split(path.sep).join("/");
+  const q = qualityForRel(rel);
   const meta = await sharp(filePath).metadata();
   let pipeline = sharp(filePath).rotate();
   pipeline = resizeIfNeeded(pipeline, meta, maxEdgeForRel(rel));
   const tmp = `${filePath}.tmp`;
-  await writeWebpToTemp(pipeline, tmp);
+  await writeWebpToTemp(pipeline, tmp, q);
   await fs.rename(tmp, filePath);
   console.log("[webp-optimize]", rel);
 }

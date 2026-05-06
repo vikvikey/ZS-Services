@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
     optimizeCss: true,
+    /** Стили в production попадают в документ без отдельных render-blocking CSS-файлов. */
+    inlineCss: true,
   },
 };
 
