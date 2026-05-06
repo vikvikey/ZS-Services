@@ -1,62 +1,83 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
-import { useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-const scrollViewport = { once: true as const, margin: "-48px" };
+const ioOpts: IntersectionObserverInit = { rootMargin: "-48px 0px", threshold: 0 };
 
-function isIntersectingViewport(el: HTMLElement): boolean {
-  const r = el.getBoundingClientRect();
-  const vh = window.innerHeight || document.documentElement.clientHeight;
-  const vw = window.innerWidth || document.documentElement.clientWidth;
-  return r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw;
-}
-
-type FadeInProps = Omit<HTMLMotionProps<"div">, "ref" | "children"> & {
+export type FadeInProps = Omit<ComponentProps<"div">, "children"> & {
+  /** Без анимации и без IO — для блоков выше сгиба (hero). */
+  immediate?: boolean;
   delay?: number;
-  className?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
-/**
- * Сначала блоки обычные и полностью видимы (div).
- * После layout измеряем: не на первом экране → заменяем на motion, скрываем и
- * показываем при скролле (whileInView). На первом экране остаётся обычный div без анимации.
- */
-export function FadeIn({ className, children, delay = 0, ...rest }: FadeInProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [placement, setPlacement] = useState<"pending" | "firstScreen" | "offScreen">("pending");
+export function FadeIn({
+  immediate = false,
+  delay = 0,
+  className,
+  children,
+  style,
+  ...rest
+}: FadeInProps) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [shown, setShown] = useState(immediate);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    setPlacement(isIntersectingViewport(el) ? "firstScreen" : "offScreen");
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = () => setReduceMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const commonClass = cn(className);
-  const divProps = rest as ComponentProps<"div">;
+  useEffect(() => {
+    if (immediate || reduceMotion) {
+      setShown(true);
+      return;
+    }
+    if (typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
 
-  if (placement !== "offScreen") {
-    return (
-      <div ref={ref} className={commonClass} {...divProps}>
-        {children}
-      </div>
-    );
-  }
+    const el = ref.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+          return;
+        }
+      }
+    }, ioOpts);
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [immediate, reduceMotion]);
+
+  const animate = !immediate && !reduceMotion;
 
   return (
-    <motion.div
-      key="fade-below-fold"
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={scrollViewport}
-      transition={{ duration: 0.35, delay }}
-      className={commonClass}
+      className={cn(
+        animate && [
+          "ease-out transition-[opacity,transform] duration-[350ms]",
+          shown ? "translate-y-0 opacity-100" : "translate-y-3.5 opacity-0",
+        ],
+        className
+      )}
+      style={{
+        ...style,
+        ...(animate && shown && delay > 0 ? { transitionDelay: `${delay}s` } : undefined),
+      }}
       {...rest}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
