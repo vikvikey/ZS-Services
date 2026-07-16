@@ -13,16 +13,8 @@ export function ContactsSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <FadeIn>
           <h2 className="font-heading text-2xl font-bold text-neutral-900 sm:text-3xl">
-            {c.titleBeforeAccent} <span className="text-gradient-accent">{c.titleAccent}</span>
+            {c.titleBeforeAccent}
           </h2>
-          <p className="mt-3 max-w-2xl text-sm text-neutral-600 sm:text-base">
-            {c.introPart1}
-            <span className="font-medium text-neutral-800">{c.introEmphasize1}</span>
-            {c.introPart2}
-            <span className="font-medium text-neutral-800">{c.introEmphasize2}</span>
-            {c.introPart3}
-            <span className="font-medium text-neutral-800">{c.introEmphasize3}</span> {c.introPart4}
-          </p>
         </FadeIn>
         <FadeIn delay={0.06} className="mt-8 grid gap-6 sm:grid-cols-2">
           <ContactChannelCard
@@ -43,13 +35,6 @@ export function ContactsSection() {
             actionHref={mailto}
             actionLabel={c.emailActionLabel}
           />
-        </FadeIn>
-        <FadeIn delay={0.1} className="mt-6 flex items-start gap-3 rounded-xl border border-dashed border-sky-accent/40 bg-sky-accent/5 p-5">
-          <MapPin className="mt-0.5 h-6 w-6 shrink-0 text-sky-accent" aria-hidden />
-          <div>
-            <div className="font-heading font-semibold text-neutral-900">{c.areaTitle}</div>
-            <p className="mt-1 text-neutral-600">{siteConfig.serviceArea}</p>
-          </div>
         </FadeIn>
       </div>
     </section>

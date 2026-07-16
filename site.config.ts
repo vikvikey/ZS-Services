@@ -1,27 +1,23 @@
 export type GallerySlide = {
   id: string;
   title: string;
-  duration: string;
   beforeSrc: string;
   afterSrc: string;
   beforeAlt: string;
   afterAlt: string;
 };
 
-export type Testimonial = {
-  id: string;
-  name: string;
-  city: string;
-  text: string;
-  imageSrc?: string;
-  imageAlt?: string;
-};
-
 export type ServiceItem = {
   id: string;
   title: string;
-  description: string;
-  icon: "paint" | "tiles" | "electric" | "plumb" | "drywall" | "floor" | "bath" | "doors";
+  description?: string;
+  icon: "paint" | "tiles" | "electric" | "plumb" | "drywall" | "floor" | "bath" | "doors" | "spray";
+};
+
+export type ContentBlock = {
+  id: string;
+  title: string;
+  paragraphs: readonly string[];
 };
 
 /** IDs DOM des cartes (doivent correspondre aux ancres href) */
@@ -49,172 +45,182 @@ export function fillCopy(template: string, vars: Record<string, string | number>
 export const siteConfig = {
   brandName: "ZS Services",
   brandLogoSrc: "/images/logo.svg",
-  brandLogoAlt: "ZS Services",
-  city: "Odessa",
-  experienceYears: 12,
-  warrantyYears: 3,
-  completedProjects: 180,
-  satisfactionPercent: 94,
+  brandLogoAlt: "ZS Services — rénovation et finition à Marseille",
+  city: "Marseille",
   phoneE164: "+33611776492",
   phoneDisplay: "+33 6 11 77 64 92",
   email: "zsservices13@gmail.com",
-  serviceArea: "Odessa et jusqu'à 30 km dans la région",
+  serviceArea: "Marseille et ces alentours",
   aboutLead:
-    "Je travaille seul : prise de mesures, devis et réalisation des travaux. Pas de marges inutiles « au milieu » — délais et volume fixés avant le début.",
+    "Nous mettons notre expertise au service des particuliers, des professionnels et des collectivités pour réaliser des projets de rénovation et de finition de haute qualité.",
   aboutBody:
-    "Spécialisation — appartements et maisons : préparation des murs, carrelage, petits travaux de finition. Je peux montrer des chantiers et donner les contacts d'anciens clients sur demande.",
-  masterPhotoSrc: "/images/master-avatar.webp",
-  masterPhotoAlt: "Artisan indépendant ZS Services sur un chantier à Odessa",
-  examplePhotoSrc: "/images/gallery/example-photo.webp",
-  examplePhotoAlt: "Exemple de photo de chantier",
+    "Basés à Marseille, nous intervenons dans toute la région et accompagnons nos clients à chaque étape de leur projet, de l'étude des besoins jusqu'à la livraison des travaux. Notre priorité est de proposer un travail irréprochable, des finitions soignées et un service fiable, dans le respect des délais, du budget et des normes en vigueur.",
+  masterPhotoSrc: "/images/IMG_0284.webp",
+  masterPhotoAlt: "ZS Services sur un chantier de rénovation à Marseille",
 
   microTrust: [
-    { id: "1", text: "Visite aujourd'hui" },
-    { id: "2", text: "Estimation gratuite" },
-    { id: "3", text: "Garantie 3 ans" },
-  ] as const,
-
-  stats: [
-    { id: "exp", label: "Années d'expérience", value: "12+" },
-    { id: "obj", label: "Chantiers", value: "180+" },
-    { id: "sat", label: "Clients satisfaits", value: "94%" },
-    { id: "war", label: "Garantie", value: "3 ans" },
+    { id: "1", text: "Professionnalisme et de réactivité" },
+    { id: "2", text: "Des finitions haut de gamme" },
+    { id: "3", text: "Le respect des délais annoncés" },
+    { id: "4", text: "Des solutions adaptées à chaque projet" },
+    { id: "5", text: "Devis clairs et transparents" },
+    { id: "6", text: "Un interlocuteur unique du début à la fin des travaux" },
   ] as const,
 
   services: [
     {
-      id: "walls",
-      title: "Murs lisses prêts à peindre en 2 jours",
-      description: "Enduit, ponçage, sans ondulations à la lumière.",
-      icon: "paint",
-    },
-    {
-      id: "tiles",
-      title: "Pose de carrelage sans dénivelés",
-      description: "Salle de bain, cuisine, couloir — planéité vérifiée au niveau.",
-      icon: "tiles",
-    },
-    {
-      id: "electric",
-      title: "Remplacement de câblage ponctuel",
-      description: "Points lumineux, prises, circuits — livré dans les délais.",
-      icon: "electric",
-    },
-    {
-      id: "bath",
-      title: "Salle de bain clé en main en 7 jours",
-      description: "Étanchéité, carrelage, siphons — sans fuites à la livraison.",
-      icon: "bath",
-    },
-    {
-      id: "drywall",
-      title: "Cloisons et caissons en plaques de plâtre",
-      description: "Angles droits, préparés pour prises et éclairage.",
+      id: "plaster",
+      title: "Remise en état après dégâts des eaux",
       icon: "drywall",
     },
     {
-      id: "floor",
-      title: "Ragréage de sol pour stratifié",
-      description: "Chape/enduit coulant — sans grincements ni affaissements.",
+      id: "partitions",
+      title: "Création de cloisons et de faux plafonds",
+      icon: "drywall",
+    },
+    {
+      id: "insulation",
+      title: "Doublage des murs et isolation",
       icon: "floor",
     },
     {
-      id: "doors",
-      title: "Pose de portes en 1 jour",
-      description: "Ferme-portes, jeux, finition des huisseries.",
-      icon: "doors",
+      id: "prep",
+      title: "Préparation des supports enduits, joints, ponçage",
+      icon: "paint",
     },
     {
-      id: "plumb",
-      title: "Robinets et plomberie",
-      description: "Raccordement, réinstallation, réparation des fuites.",
-      icon: "plumb",
+      id: "paint",
+      title: "Travaux de peinture intérieure et extérieure",
+      icon: "paint",
+    },
+    {
+      id: "full-reno",
+      title: "Rénovation complète de maisons, appartements, bureaux et commerces",
+      icon: "bath",
+    },
+    {
+      id: "resin",
+      title: "Revêtements techniques en résine époxy et polyuréthane",
+      icon: "floor",
+    },
+    {
+      id: "parking",
+      title: "Rénovation de parkings souterrains",
+      icon: "tiles",
+    },
+    {
+      id: "spray",
+      title: "Marquage au sol, signalisation et systèmes antidérapants",
+      icon: "spray",
     },
   ] satisfies ServiceItem[],
 
+  engagement: {
+    title: "Notre engagement",
+    paragraphs: [
+      "Chez ZS Services, chaque projet est réalisé avec rigueur, précision et professionnalisme. Nous sélectionnons des matériaux de qualité et mettons en œuvre des techniques modernes afin de garantir des réalisations durables, esthétiques et conformes aux exigences les plus élevées.",
+      "Nous nous engageons à respecter les délais annoncés et à livrer chaque chantier dans les temps, tout en veillant au strict respect des normes en vigueur.",
+      "La satisfaction de nos clients est au cœur de notre engagement. Grâce à une communication transparente, un suivi personnalisé et une coordination efficace des différents corps de métier, nous assurons un déroulement fluide des travaux et un résultat à la hauteur des attentes.",
+    ],
+  } as const,
+
+  specializedBlocks: [
+    {
+      id: "global",
+      title: "Une prise en charge globale de votre projet",
+      paragraphs: [
+        "Afin de garantir un accompagnement complet, ZS Services s'appuie sur un réseau de partenaires qualifiés, reconnus pour leur expertise dans leurs domaines respectifs.",
+        "Selon les besoins de votre projet, nous coordonnons également les interventions d'entreprises spécialisées en électricité, plomberie, chauffage, climatisation, revêtements de sol, menuiserie, serrurerie et autres corps de métier du bâtiment.",
+        "Vous bénéficiez ainsi d'un interlocuteur unique tout au long du chantier, tandis que chaque intervention est réalisée par des professionnels expérimentés et qualifiés. Cette organisation nous permet de gérer des projets de rénovation complets, en assurant une parfaite coordination entre les différents métiers et un niveau de qualité constant.",
+      ],
+    },
+  ] satisfies readonly ContentBlock[],
+
   gallery: [
     {
-      id: "bath",
-      title: "Salle de bain",
-      duration: "9 jours",
+      id: "chocolaterie",
+      title: "Rénovation de la façade d’une chocolaterie",
       beforeSrc: "/images/gallery/photo_2026-05-05 15.51.18.webp",
       afterSrc: "/images/gallery/photo_2026-05-05 15.51.21.webp",
-      beforeAlt: "Avant : démolition de la salle de bain",
-      afterAlt: "Après : carrelage et plomberie",
+      beforeAlt: "Avant : façade à rénover",
+      afterAlt: "Après : façade rénovée",
     },
     {
-      id: "bath1",
-      title: "Salle de bain",
-      duration: "9 jours",
+      id: "salle",
+      title: "Rénovation d’une salle de bain",
       beforeSrc: "/images/gallery/bath-before.webp",
       afterSrc: "/images/gallery/bath-after.webp",
-      beforeAlt: "Avant : démolition de la salle de bain",
-      afterAlt: "Après : carrelage et plomberie",
+      beforeAlt: "Avant : salle de bain à rénover",
+      afterAlt: "Après : salle de bain rénovée",
     },
     {
-      id: "bath2",
-      title: "Salle de bain",
-      duration: "9 jours",
+      id: "musee",
+      title: "Peinture à la chaux Musée Provincial Château Gombert",
       beforeSrc: "/images/gallery/photo_2026-05-05 15.52.31.webp",
       afterSrc: "/images/gallery/photo_2026-05-05 15.52.33.webp",
-      beforeAlt: "Avant : démolition de la salle de bain",
-      afterAlt: "Après : carrelage et plomberie",
+      beforeAlt: "Avant : espace commercial à rénover",
+      afterAlt: "Après : espace commercial rénové",
     },
     {
-      id: "bath3",
-      title: "Salle de bain",
-      duration: "9 jours",
+      id: "sport",
+      title: "Remise en état d’une salle de sport après dégât des eaux",
       beforeSrc: "/images/gallery/photo_2026-05-05 15.52.40.webp",
       afterSrc: "/images/gallery/photo_2026-05-05 15.52.42.webp",
-      beforeAlt: "Avant : démolition de la salle de bain",
-      afterAlt: "Après : carrelage et plomberie",
+      beforeAlt: "Avant : salle de sport à rénover",
+      afterAlt: "Après : salle de sport rénovée",
     },
     {
-      id: "bath4",
-      title: "Salle de bain",
-      duration: "9 jours",
+      id: "devanture",
+      title: "Rénovation de la devanture d’une boutique",
       beforeSrc: "/images/gallery/photo_2026-05-05 15.52.45.webp",
       afterSrc: "/images/gallery/photo_2026-05-05 15.52.47.webp",
-      beforeAlt: "Avant : démolition de la salle de bain",
-      afterAlt: "Après : carrelage et plomberie",
+      beforeAlt: "Avant : devanture à rénover",
+      afterAlt: "Après : devanture rénovée",
+    },
+    {
+      id: "appartement",
+      title: "Rénovation d’un appartement",
+      beforeSrc: "/images/gallery/IMG_5777.webp",
+      afterSrc: "/images/gallery/IMG_8075.webp",
+      beforeAlt: "Avant : appartement à rénover",
+      afterAlt: "Après : appartement rénové",
+    },
+    {
+      id: "cloture",
+      title: "Enduisage du soubassement d’une clôture",
+      beforeSrc: "/images/gallery/IMG_1809.webp",
+      afterSrc: "/images/gallery/IMG_1810.webp",
+      beforeAlt: "Avant : clôture à rénover",
+      afterAlt: "Après : clôture rénovée",
+    },
+    {
+      id: "etageres",
+      title: "Création des étagères un plaques de plâtre",
+      beforeSrc: "/images/gallery/IMG_0878.webp",
+      afterSrc: "/images/gallery/IMG_0887.webp",
+      beforeAlt: "Avant : étagères à rénover",
+      afterAlt: "Après : étagères rénovées",
     },
   ] satisfies GallerySlide[],
-
-  testimonials: [
-    {
-      id: "t1",
-      name: "Irina",
-      city: "Odessa",
-      text: "Couloir et cuisine faits en 10 jours, comme promis. Disponible chaque jour, ils ont enlevé les déchets eux-mêmes.",
-    },
-    {
-      id: "t2",
-      name: "Andrei",
-      city: "Tchernomorsk",
-      text: "Salle de bain sans carrelage de travers. Le devis n'a pas dérapé — j'ai seulement payé les travaux cachés sur la colonne.",
-    },
-    {
-      id: "t3",
-      name: "Oksana",
-      city: "Odessa",
-      text: "Il fallait préparer rapidement pour une location. Il est venu le soir, le lendemain on ponçait déjà.",
-    },
-  ] satisfies Testimonial[],
 
   /** Tous les textes utilisateur et UI (le contenu des listes ci-dessus reste dans les données des sections) */
   strings: {
     htmlLang: "fr",
 
     seo: {
-      titleTemplate: "Rénovation d'appartements à {city} en 7–14 jours | {brandName}",
+      titleTemplate:
+        "{brandName} – Votre partenaire de confiance pour tous vos projets de rénovation",
       descriptionTemplate:
-        "Artisan indépendant, {experienceYears}+ ans d'expérience. Téléphone {phoneDisplay}, email {email}. {serviceArea}.",
-      ogTitleTemplate: "Rénovation d'appartements à {city} en 7–14 jours",
-      ogDescriptionTemplate: "Délais et devis avant le début. {phoneDisplay} · {email}",
+        "Chez ZS Services, nous mettons notre expertise au service des particuliers, des professionnels et des collectivités pour réaliser des projets de rénovation et de finition de haute qualité. {serviceArea}. {phoneDisplay} · {email}",
+      ogTitleTemplate: "ZS Services, l'excellence au service de vos projets.",
+      ogDescriptionTemplate:
+        "Basés à Marseille, nous intervenons dans toute la région et accompagnons nos clients à chaque étape de leur projet, de l'étude des besoins jusqu'à la livraison des travaux. {phoneDisplay} · {email}",
       ogLocale: "fr_FR",
-      ogImageAltTemplate: "{brandName} — rénovation d'appartements",
-      twitterTitleTemplate: "Rénovation d'appartements à {city}",
-      twitterDescriptionTemplate: "Artisan indépendant, {experienceYears}+ ans. {serviceArea}",
+      ogImageAltTemplate: "{brandName} — rénovation et finition à {city}",
+      twitterTitleTemplate:
+        "{brandName} – Votre partenaire de confiance pour tous vos projets de rénovation",
+      twitterDescriptionTemplate:
+        "Chez ZS Services, nous mettons notre expertise au service des particuliers, des professionnels et des collectivités. {serviceArea}.",
     },
 
     header: {
@@ -232,59 +238,38 @@ export const siteConfig = {
     },
 
     hero: {
-      headlineBeforeCity: "Rénovation d'appartements à",
-      headlineAfterCity: "en",
-      headlineDuration: "7–14 jours",
-      sublineTemplate:
-        "Artisan indépendant, {experienceYears}+ ans d'expérience. Devis et délais avant le début des travaux — sans surprises en cours de route.",
+      headline: "ZS Services – Votre partenaire de confiance pour tous vos projets de rénovation",
+      whyChooseTitle: "Pourquoi choisir ZS Services?",
       ctaPhone: "Appeler",
-      ctaEmail: "Écrire",
-    },
-
-    trust: {
-      titleBeforeAccent: "Qui fera les travaux :",
-      titleAccent: "moi-même",
+      ctaEmail: "Demander un devis",
     },
 
     services: {
-      titleBeforeAccent: "Ce que je fais —",
-      titleAccent: "en bref et avec délais",
-      subtitle: "Chaque carte — un résultat concret, pas « un peu de tout ».",
+      titleBeforeAccent: "Nos domaines",
+      titleAccent: "d'intervention",
+      subtitle: "Nous proposons une large gamme de prestations dans le secteur du bâtiment :",
     },
 
     gallery: {
-      titleBeforeAccent: "Avant et après",
-      titleAccent: "sur de vrais chantiers",
-      description:
-        "Parcourez les exemples : à gauche l'état avant travaux, à droite — le résultat. Légende et délai pour chaque chantier.",
+      titleBeforeAccent: "Avant / après",
+      titleAccent: "sur nos chantiers",
+      description: "Parcourez nos réalisations.",
       labelBefore: "Avant",
       labelAfter: "Après",
       durationPrefix: "Délai :",
     },
 
-    testimonials: {
-      titleBeforeAccent: "Avis",
-      titleAccent: "avec ville et détails",
-      imageAltTemplate: "Photo pour l'avis de {name}",
-    },
-
     repeatCta: {
-      title: "Vous voulez la même chose ?",
-      body: "Écrivez ce qu'il faut faire et où se trouve le bien — je répondrai avec une estimation de délai et de budget.",
+      title: "Construisons votre projet ensemble",
+      body: "Que vous souhaitiez rénover un appartement, transformer un local commercial, rénover un parking ou réaliser des travaux de plâtrerie et de peinture, ZS Services vous accompagne avec le même niveau d'exigence et de qualité.",
+      tagline: "ZS Services, l'excellence au service de vos projets.",
       ctaPhone: "Appeler",
-      ctaEmail: "Écrire",
+      ctaEmail: "Demander un devis",
     },
 
     contacts: {
-      titleBeforeAccent: "Contacts et",
+      titleBeforeAccent: "Contacts",
       titleAccent: "zone d'intervention",
-      introPart1: "Téléphone et email ci-dessous : vous pouvez ",
-      introEmphasize1: "simplement consulter",
-      introPart2: ", ",
-      introEmphasize2: "copier",
-      introPart3: " dans le presse-papiers ou ",
-      introEmphasize3: "appeler / ouvrir l'email directement",
-      introPart4: " — boutons sous chaque contact.",
       phoneChannelLabel: "Téléphone",
       emailChannelLabel: "Email",
       phoneActionLabel: "Appeler",
@@ -302,10 +287,10 @@ export const siteConfig = {
 
     leadForm: {
       titleBeforeAccent: "Laissez une demande —",
-      titleAccent: "je vous rappelle",
-      subtitle: "Nom et téléphone uniquement. Commentaire — en option.",
+      titleAccent: "nous vous recontactons",
+      subtitle: "Nom et téléphone uniquement. Décrivez votre projet en commentaire — en option.",
       successTitle: "Demande envoyée",
-      successBody: "Je vous contacterai bientôt. En cas d'urgence — appelez ou écrivez par email.",
+      successBody: "Nous vous contacterons rapidement. En cas d'urgence — appelez ou écrivez par email.",
       errorNotConfigured: "Formulaire non configuré : ajoutez NEXT_PUBLIC_FORMSPREE_ID dans .env",
       errorSubmit: "Échec de l'envoi. Appelez ou écrivez par email.",
       errorNetwork: "Réseau indisponible. Écrivez par email ou appelez.",
@@ -313,15 +298,15 @@ export const siteConfig = {
       labelPhone: "Téléphone",
       labelComment: "Commentaire",
       labelCommentOptional: "(facultatif)",
-      placeholderName: "Comment vous appeler",
+      placeholderName: "Votre nom",
       placeholderPhone: "+33...",
-      placeholderMessage: "Quartier, travaux souhaités, horaire préféré",
+      placeholderMessage: "Type de travaux, adresse, délai souhaité",
       submitIdle: "Envoyer la demande",
       submitSending: "Envoi…",
     },
 
     footer: {
-      lineTemplate: "© {year} {brandName}. Rénovation d'appartements à {city}.",
+      lineTemplate: "© {year} {brandName}. ZS Services, l'excellence au service de vos projets.",
     },
   },
 } as const;
