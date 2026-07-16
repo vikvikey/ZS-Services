@@ -16,7 +16,6 @@ const { seo, htmlLang } = siteConfig.strings;
 const metaVars = {
   city: siteConfig.city,
   brandName: siteConfig.brandName,
-  experienceYears: siteConfig.experienceYears,
   phoneDisplay: siteConfig.phoneDisplay,
   email: siteConfig.email,
   serviceArea: siteConfig.serviceArea,
