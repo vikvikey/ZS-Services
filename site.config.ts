@@ -50,7 +50,6 @@ export const siteConfig = {
   brandName: "ZS Services",
   brandLogoSrc: "/images/logo.svg",
   brandLogoAlt: "ZS Services",
-  brandLogoText: "SERVICES",
   city: "Odessa",
   experienceYears: 12,
   warrantyYears: 3,
