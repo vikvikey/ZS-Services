@@ -34,7 +34,7 @@ export function HeroSection() {
             </ButtonLink>
           </FadeIn>
         </div>
-        <FadeIn immediate className="relative mx-auto w-full max-w-[320px] lg:mx-0">
+        <FadeIn immediate className="hidden relative mx-auto w-full max-w-[320px] lg:mx-0 lg:block">
           <div className="overflow-hidden rounded-xl">
             <Image
               src={siteConfig.masterPhotoSrc}
