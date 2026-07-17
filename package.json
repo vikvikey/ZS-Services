@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "optimize-images": "node scripts/convert-public-images-to-webp.mjs",
-    "build": "npm run optimize-images && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
