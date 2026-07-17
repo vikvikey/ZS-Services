@@ -44,7 +44,7 @@ export function fillCopy(template: string, vars: Record<string, string | number>
 
 export const siteConfig = {
   brandName: "ZS Services",
-  brandLogoSrc: "/images/logo.svg",
+  brandLogoSrc: "/images/logo-nobg.svg",
   brandLogoAlt: "ZS Services — rénovation et finition à Marseille",
   city: "Marseille",
   phoneE164: "+33611776492",
