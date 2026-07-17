@@ -16,7 +16,7 @@ export function HeroSection() {
             </h1>
           </FadeIn>
           <div className="mt-5">
-            <FadeIn delay={0.05}>
+            <FadeIn immediate>
               <p className="text-lg font-medium text-neutral-800">{siteConfig.aboutLead}</p>
               <p className="mt-4 text-neutral-600">{siteConfig.aboutBody}</p>
             </FadeIn>
