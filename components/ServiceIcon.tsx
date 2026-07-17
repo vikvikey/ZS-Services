@@ -8,7 +8,13 @@ import {
   Layers,
   Paintbrush,
   Zap,
-  SprayCan
+  SprayCan,
+  DropletOff,
+  BrickWall,
+  House,
+  MirrorRectangular,
+  PaintBucket,
+  SquareParking,
 } from "lucide-react";
 
 const iconMap: Record<ServiceItem["icon"], React.ComponentType<{ className?: string }>> = {
@@ -21,6 +27,12 @@ const iconMap: Record<ServiceItem["icon"], React.ComponentType<{ className?: str
   bath: Bath,
   doors: DoorOpen,
   spray: SprayCan,
+  "droplet-off": DropletOff,
+  "brick-wall": BrickWall,
+  house: House,
+  "mirror-rectangular": MirrorRectangular,
+  "paint-bucket": PaintBucket,
+  "square-parking": SquareParking,
 };
 
 export function ServiceIcon({ icon, className }: { icon: ServiceItem["icon"]; className?: string }) {
