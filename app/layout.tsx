@@ -24,6 +24,15 @@ const metaVars = {
 export const metadata: Metadata = {
   title: fillCopy(seo.titleTemplate, metaVars),
   description: fillCopy(seo.descriptionTemplate, metaVars),
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/manifest.json",
   openGraph: {
     title: fillCopy(seo.ogTitleTemplate, metaVars),
     description: fillCopy(seo.ogDescriptionTemplate, metaVars),

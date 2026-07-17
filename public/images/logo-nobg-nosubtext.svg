@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg"
 shape-rendering="geometricPrecision"
 width="4000" height="4000" viewBox="0 0 1024 1024">
+<rect width="1024" height="1024" rx="192" ry="192" fill="#f0faff" />
+<g transform="translate(10.424, 93.962)">
 <path d="M 219.991 177.238
 C 227.658 177.245 235.326 177.747 242.994 177.843
 C 250.501 177.936 258.087 177.658 265.51 178.175
@@ -8308,4 +8310,5 @@ C 916.039 552.555 915.471 551.622 914.722 552.5
 C 914.753 551.412 914.959 550.507 915.189 549.458 Z"
 opacity="1" fill="rgb(194,35,30)" fill-rule="evenodd" />
 
+</g>
 </svg>
