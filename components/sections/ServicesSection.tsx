@@ -10,7 +10,7 @@ export function ServicesSection() {
     <section id="services" className="relative scroll-mt-20 overflow-hidden py-12 sm:py-16">
       <Image
         src="/images/public/IMG_1829.webp"
-        alt=""
+        alt="Résultat des réparations en magasin"
         fill
         sizes="100vw"
         className="object-cover object-center"

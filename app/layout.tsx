@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
+import { getSiteUrl } from "@/lib/site-url";
 import { siteConfig, fillCopy } from "@/site.config";
 
 const inter = Inter({
@@ -9,8 +11,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://zs-services.example.com";
+const siteUrl = getSiteUrl();
+const ogImageUrl = `${siteUrl}/images/logo-nobg-nosubtext.svg`;
 
 const { seo, htmlLang } = siteConfig.strings;
 const metaVars = {
@@ -24,9 +26,11 @@ const metaVars = {
 export const metadata: Metadata = {
   title: fillCopy(seo.titleTemplate, metaVars),
   description: fillCopy(seo.descriptionTemplate, metaVars),
+  alternates: {
+    canonical: siteUrl,
+  },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
@@ -42,9 +46,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.brandName,
     images: [
       {
-        url: `${siteUrl}/images/og-placeholder.svg`,
-        width: 1200,
-        height: 630,
+        url: ogImageUrl,
         alt: fillCopy(seo.ogImageAltTemplate, metaVars),
       },
     ],
@@ -53,13 +55,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: fillCopy(seo.twitterTitleTemplate, metaVars),
     description: fillCopy(seo.twitterDescriptionTemplate, metaVars),
+    images: [ogImageUrl],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang={htmlLang} className={inter.variable}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <LocalBusinessJsonLd />
+        {children}
+      </body>
     </html>
   );
 }
