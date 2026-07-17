@@ -9,7 +9,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="relative scroll-mt-20 overflow-hidden py-12 sm:py-16">
       <Image
-        src="/images/public/IMG_1829.jpg"
+        src="/images/public/IMG_1829.webp"
         alt=""
         fill
         sizes="100vw"
