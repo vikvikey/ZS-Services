@@ -85,7 +85,7 @@ export const siteConfig = {
     },
     {
       id: "prep",
-      title: "Préparation des supports enduits, joints, ponçage",
+      title: "Préparation des supports enduits, joints, ratissage complet",
       icon: "mirror-rectangular",
     },
     {
@@ -101,7 +101,7 @@ export const siteConfig = {
     {
       id: "resin",
       title: "Revêtements techniques en résine époxy et polyuréthane",
-      icon: "paint-bucket",
+      icon: "floor",
     },
     {
       id: "parking",
