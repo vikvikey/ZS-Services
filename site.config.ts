@@ -11,7 +11,7 @@ export type ServiceItem = {
   id: string;
   title: string;
   description?: string;
-  icon: "paint" | "tiles" | "electric" | "plumb" | "drywall" | "floor" | "bath" | "doors" | "spray";
+  icon: "paint" | "tiles" | "electric" | "plumb" | "drywall" | "floor" | "bath" | "doors" | "spray" | "droplet-off" | "brick-wall" | "house" | "mirror-rectangular" | "paint-bucket" | "square-parking";
 };
 
 export type ContentBlock = {
@@ -69,14 +69,14 @@ export const siteConfig = {
 
   services: [
     {
-      id: "plaster",
+      id: "droplet-off",
       title: "Remise en état après dégâts des eaux",
-      icon: "drywall",
+      icon: "droplet-off",
     },
     {
-      id: "partitions",
+      id: "brick-wall",
       title: "Création de cloisons et de faux plafonds",
-      icon: "drywall",
+      icon: "brick-wall",
     },
     {
       id: "insulation",
@@ -86,7 +86,7 @@ export const siteConfig = {
     {
       id: "prep",
       title: "Préparation des supports enduits, joints, ponçage",
-      icon: "paint",
+      icon: "mirror-rectangular",
     },
     {
       id: "paint",
@@ -96,17 +96,17 @@ export const siteConfig = {
     {
       id: "full-reno",
       title: "Rénovation complète de maisons, appartements, bureaux et commerces",
-      icon: "bath",
+      icon: "house",
     },
     {
       id: "resin",
       title: "Revêtements techniques en résine époxy et polyuréthane",
-      icon: "floor",
+      icon: "paint-bucket",
     },
     {
       id: "parking",
       title: "Rénovation de parkings souterrains",
-      icon: "tiles",
+      icon: "square-parking",
     },
     {
       id: "spray",
