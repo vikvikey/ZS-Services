@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { InAppBrowserInsets } from "@/components/InAppBrowserInsets";
 import { siteConfig, fillCopy } from "@/site.config";
 
 const inter = Inter({
@@ -19,6 +20,12 @@ const metaVars = {
   phoneDisplay: siteConfig.phoneDisplay,
   email: siteConfig.email,
   serviceArea: siteConfig.serviceArea,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -59,7 +66,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang={htmlLang} className={inter.variable}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <InAppBrowserInsets />
+        {children}
+      </body>
     </html>
   );
 }

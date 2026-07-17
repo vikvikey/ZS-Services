@@ -8,7 +8,7 @@ export function Header() {
     siteConfig.strings.header;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-200/80 bg-surface/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-neutral-200/80 bg-surface pt-[calc(env(safe-area-inset-top,0px)+var(--in-app-top-inset))] md:bg-surface/95 md:pt-0 md:backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-1 sm:px-6">
         <a href="#hero" className="flex items-end gap-2 font-heading text-lg font-bold text-primary sm:text-3xl">
           <Image src={siteConfig.brandLogoSrc} alt={siteConfig.brandLogoAlt} width={100} height={66.32} fetchPriority="high" />

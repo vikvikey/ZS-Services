@@ -5,6 +5,12 @@
 :root {
   --color-primary: #1e3a8a;
   --color-sky: #0ea5e9;
+  --in-app-top-inset: 0px;
+}
+
+html[data-in-app-browser="true"] {
+  /* Floating URL pill row in Telegram / similar in-app browsers on iOS */
+  --in-app-top-inset: 2.75rem;
 }
 
 html {

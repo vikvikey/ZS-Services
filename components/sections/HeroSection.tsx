@@ -7,7 +7,10 @@ export function HeroSection() {
   const s = siteConfig.strings.hero;
 
   return (
-    <section id="hero" className="scroll-mt-20 bg-muted/50">
+    <section
+      id="hero"
+      className="scroll-mt-[calc(5rem+env(safe-area-inset-top,0px)+var(--in-app-top-inset))] bg-muted/50 md:scroll-mt-20"
+    >
       <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-10 pt-6 sm:px-6 sm:pb-12 sm:pt-10 lg:grid-cols-[1fr_320px] lg:items-start">
         <div>
           <FadeIn immediate>
